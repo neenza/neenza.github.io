@@ -25,6 +25,12 @@
         --gradient-color-3: #ddff61;
         --gradient-color-4: #4fff92;
     }
+    #gradient-canvas2 {
+            --gradient-color-1: #3ea9e7;
+            --gradient-color-2: #12ffe7;
+            --gradient-color-3: #ddff61;
+            --gradient-color-4: #4fff92;
+    }
 </style>
 <body class="body">
     <nav class="sticky-navbar">
@@ -35,13 +41,16 @@
         </div>
       </nav>
 
-    <section>
-        <div>
-            <br>
-            <br>
-            <br>
-        </div>
-    </section>
+
+
+      <canvas id="gradient-canvas2" style="width:100vw;height:85px"></canvas>
+      <br>
+      <script>
+          var gradient = new Gradient()
+          gradient.initGradient('#gradient-canvas2');
+      </script>
+
+
     <section class="hero-heading-right">
         <div class="container">
             
