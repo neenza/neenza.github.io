@@ -1,0 +1,54 @@
+
+    
+      .main-content {
+        padding-top: 80px; /* Adjust this value to provide enough space for the navbar */
+      }
+
+      /* Sticky Navbar styles */
+      .sticky-navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #333;
+        padding: 20px 0;
+        z-index: 100;
+        background: rgba(234, 234, 234, 0.2);
+        box-shadow: 0 8px 32px 0 rgba(76, 77, 91, 0.37);
+        backdrop-filter: blur( 6px );
+        -webkit-backdrop-filter: blur( 6px );
+        border-radius: 10px;
+        border: 1px solid rgba( 255, 255, 255, 0.18 );
+      }
+      
+      .navbar-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        color: #fff;
+      }
+      
+      .company-name {
+        letter-spacing: 2px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding-top: 5px;
+        font-family: Exo, sans-serif;
+        font-size: 23px;
+        font-weight: 800;
+        color: #333;
+      }
+      
+      .contact-button {
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-family: Exo, sans-serif;
+      }
