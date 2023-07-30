@@ -6,6 +6,11 @@ html {
   
   body {
     margin: 0;
+    padding-top: 500px;
+  }
+
+  .main-content {
+     /* Adjust this value to provide enough space for the navbar */
   }
   
   article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
@@ -26,6 +31,9 @@ html {
     display: none;
   }
   
+
+
+
   a {
     background-color: rgba(0, 0, 0, 0);
   }
@@ -698,21 +706,27 @@ html {
     height: 20px;
   }
   
-  .w-container {
+
+
+
+.sticky {
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+
+.w-container {
+
+
+
     max-width: 940px;
     margin-left: auto;
     margin-right: auto;
+
+
   }
   
-  .w-container:before, .w-container:after {
-    content: " ";
-    grid-area: 1 / 1 / 2 / 2;
-    display: table;
-  }
-  
-  .w-container:after {
-    clear: both;
-  }
+
   
   .w-container .w-row {
     margin-left: -10px;
@@ -1159,6 +1173,8 @@ html {
   .w-widget-twitter-count-shim.w--vertical.w--large {
     width: 76px;
   }
+  
+
   
   .w-background-video {
     height: 500px;
@@ -1839,8 +1855,14 @@ html {
   
   .w-nav {
     z-index: 1000;
-    background: #ddd;
+    background: #ba4c4c;
     position: relative;
+    background-color: #df3333;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1000;
   }
   
   .w-nav:before, .w-nav:after {
@@ -2134,7 +2156,7 @@ html {
   .hero-heading-right {
     background-color: #f5f7fa;
     border-bottom: 1px solid #e4ebf3;
-    padding: 80px 30px;
+    padding: 150px 30px 80px;
     position: relative;
   }
   
