@@ -2292,7 +2292,12 @@ html {
     font-weight: 300;
     box-shadow: 0 0 20px 7px rgba(174, 174, 174, .2);
   }
-  
+
+.button:hover {
+  background-color: #fff; /* Change background color on hover */
+  color: #333; /* Change text color on hover */
+  border-color: #333; /* Change border color on hover */
+}
   .div-block {
     flex-direction: column;
     justify-content: flex-start;
