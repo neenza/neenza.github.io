@@ -501,7 +501,12 @@ html {
   .w-form {
     margin: 0 0 15px;
   }
-  
+
+#successMessage,
+#errorMessage {
+    display: none; /* Hide messages initially */
+}
+
   .w-form-done {
     text-align: center;
     background-color: #ddd;
