@@ -109,6 +109,7 @@
                             <form action="https://formsubmit.co/neel.aghera23@gmail.com" method="POST" id="wf-form-Email-Form" name="wf-form-Email-Form" data-name="Email Form"
                                 class="contact-form" data-wf-page-id="64c520fd8e39ef80d7c11058"
                                 data-wf-element-id="e61ae1b3-6161-bf50-c06e-10e303e0af2a">
+                                <input type="hidden" name="_captcha" value="false">
                                 <div class="w-layout-grid contact-form-grid">
                                     <div id="w-node-e61ae1b3-6161-bf50-c06e-10e303e0af2c-d7c11058"><label for="Name"
                                             class="field-label">NAME</label><input type="text"
@@ -125,10 +126,10 @@
                                 </div><input type="submit" value="Submit" data-wait="Please wait..."
                                     class="button-2 w-button" />
                             </form>
-                            <div class="status-message cc-success-message w-form-done">
+                            <div class="status-message cc-success-message w-form-done" id="successMessage">
                                 <div>Thank you! Your submission has been received!</div>
                             </div>
-                            <div class="status-message cc-error-message w-form-fail">
+                            <div class="status-message cc-error-message w-form-fail" id="errorMessage">
                                 <div>Oops! Something went wrong while submitting the form.</div>
                             </div>
                         </div>
@@ -159,7 +160,28 @@ function myFunction() {
   }
 }
         </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("wf-form-Email-Form");
+        const successMessage = document.getElementById("successMessage");
+        const errorMessage = document.getElementById("errorMessage");
 
+        form.addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent the form from actually submitting
+
+            // Simulate form submission success (You can replace this with actual AJAX submission)
+            const isSuccess = true; // Simulate success
+
+            if (isSuccess) {
+                successMessage.style.display = "block"; // Display success message
+                errorMessage.style.display = "none";    // Hide error message
+            } else {
+                successMessage.style.display = "none";   // Hide success message
+                errorMessage.style.display = "block";    // Display error message
+            }
+        });
+    });
+        </script>
 </body>
 
 </html>
