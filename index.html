@@ -160,28 +160,29 @@ function myFunction() {
   }
 }
         </script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-        const form = document.getElementById("wf-form-Email-Form");
-        const successMessage = document.getElementById("successMessage");
-        const errorMessage = document.getElementById("errorMessage");
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("wf-form-Email-Form");
+            const successMessage = document.getElementById("successMessage");
+            const errorMessage = document.getElementById("errorMessage");
 
-        form.addEventListener("submit", function (event) {
-            event.preventDefault(); // Prevent the form from actually submitting
+            form.addEventListener("submit", function () {
+                // Simulate form submission success (You can replace this with actual AJAX submission)
+                const isSuccess = true; // Simulate success
 
-            // Simulate form submission success (You can replace this with actual AJAX submission)
-            const isSuccess = true; // Simulate success
-
-            if (isSuccess) {
-                successMessage.style.display = "block"; // Display success message
-                errorMessage.style.display = "none";    // Hide error message
-            } else {
-                successMessage.style.display = "none";   // Hide success message
-                errorMessage.style.display = "block";    // Display error message
-            }
+                if (isSuccess) {
+                    successMessage.style.display = "block"; // Display success message
+                    errorMessage.style.display = "none";    // Hide error message
+                } else {
+                    successMessage.style.display = "none";   // Hide success message
+                    errorMessage.style.display = "block";    // Display error message
+                }
+                
+                // Optionally, submit the form using AJAX
+                // You can use fetch or XMLHttpRequest to send the form data to the server
+            });
         });
-    });
-        </script>
+    </script>
 </body>
 
 </html>
