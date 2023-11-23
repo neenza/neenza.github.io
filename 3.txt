@@ -1,0 +1,96 @@
+Algorithm : 
+1. Start
+2. Initialize a stack of integers and set the top pointer to -1.
+3. Define a constant MAX_SIZE to represent the maximum size of 
+the stack (e.g., 100).
+Push Operation:
+4. To add an element to the stack, perform the following steps:
+a. Check if the top pointer (top) is equal to MAX_SIZE - 1. If it is, 
+display "Stack Overflow: Cannot push, stack is full" and exit.
+b. Increment the top pointer (top) by 1.
+c. Store the data in the stack at the position indicated by top.
+d. Display "Pushed [data] onto the stack," where [data] is the value 
+being pushed.
+Pop Operation:
+5. To remove an element from the stack, perform the following steps:
+a. Check if the top pointer (top) is equal to -1. If it is, display "Stack 
+Underflow: Cannot pop, stack is empty" and exit.
+b. Display "Popped [data] from the stack," where [data] is the value 
+being removed.
+c. Decrement the top pointer (top) by 1.
+Peep Operation:
+6. To view the top element of the stack without removing it, perform 
+the following steps:
+a. Check if the top pointer (top) is equal to -1. If it is, display "Stack is 
+empty" and exit.
+b. Return the value at the top of the stack (i.e., stack[top]).
+Display Operation:
+7. To display all elements in the stack, perform the following steps:
+a. Check if the top pointer (top) is equal to -1. If it is, display "Stack is 
+empty" and exit.
+b. Display "Stack elements: " to indicate the start of the list of 
+elements.
+c. Loop through the stack from index 0 to the top (top) and display 
+each element separated by spaces.
+d. Display a new line to end the list of elements.
+In the main function:
+a. Push three elements (e.g., 10, 20, 30) onto the stack.
+b. Display the elements in the stack.
+c. Pop an element from the stack.
+d. Display the updated elements in the stack.
+e. Peep at the top element and display it if the stack is not empty.
+End
+Code :
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX_SIZE 100
+int stack[MAX_SIZE];
+int top = -1;
+void push(int data) {
+ if (top == MAX_SIZE - 1) {
+ printf("Stack Overflow: Cannot push %d, stack is 
+full\n", data);
+ return;
+ }
+ stack[++top] = data;
+ printf("Pushed %d onto the stack\n", data);
+}
+void pop() {
+ if (top == -1) {
+ printf("Stack Underflow: Cannot pop, stack is 
+empty\n");
+ return;
+ }
+ printf("Popped %d from the stack\n", stack[top--]);
+}
+int peep() {
+ if (top == -1) {
+ printf("Stack is empty\n");
+ return -1;
+ }
+ return stack[top];
+}
+void display() {
+ if (top == -1) {
+ printf("Stack is empty\n");
+ return;
+ }
+ printf("Stack elements: ");
+ for (int i = 0; i <= top; i++) {
+ printf("%d ", stack[i]);
+ }
+ printf("\n");
+}
+int main() {
+ push(10);
+ push(20);
+ push(30);
+ display();
+ pop();
+ display();
+ int topElement = peep();
+ if (topElement != -1) {
+ printf("Top element: %d\n", topElement);
+ }
+ return 0;
+}

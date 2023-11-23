@@ -1,0 +1,116 @@
+Algorithm:
+1. Start
+2. Initialize a queue of integers and set both front and rear pointers 
+to -1.
+3. Define a constant MAX_SIZE to represent the maximum size of 
+the queue (e.g., 100).
+Enqueue Operation:
+4. To add an element to the queue, perform the following steps:
+a. Check if the rear pointer is equal to MAX_SIZE - 1. If it is, display 
+"Queue Overflow: Cannot enqueue, queue is full" and exit.
+b. If front is -1, set it to 0 (initialize the queue).
+c. Increment the rear pointer by 1.
+d. Store the data in the queue at the position indicated by rear.
+e. Display "Enqueued [data] into the queue," where [data] is the value 
+being enqueued.
+Dequeue Operation:
+5. To remove an element from the front of the queue, perform the 
+following steps:
+a. Check if the front pointer is equal to -1. If it is, display "Queue 
+Underflow: Cannot dequeue, queue is empty" and exit.
+b. Display "Dequeued [data] from the queue," where [data] is the 
+value being dequeued, using the front pointer.
+c. Increment the front pointer by 1.
+d. If front becomes greater than rear, reset both front and rear to -1 to 
+indicate an empty queue.
+Peep Operation:
+6. To view the front element of the queue without removal, perform 
+the following steps:
+a. Check if the front pointer is equal to -1. If it is, display "Queue is 
+empty" and exit.
+b. Return the value at the front of the queue (i.e., queue[front]).
+Display Operation:
+7. To display all elements in the queue, perform the following steps:
+a. Check if the front pointer is equal to -1. If it is, display "Queue is 
+empty" and exit.
+b. Display "Queue elements: " to indicate the start of the list of 
+elements.
+c. Loop through the queue from the front to the rear and display each 
+element separated by spaces.
+d. Display a new line to end the list of elements.
+In the main function:
+a. Perform queue operations:
+Enqueue three elements (e.g., 10, 20, 30) into the queue.
+Display the elements in the queue.
+Dequeue an element from the queue.
+Display the updated elements in the queue.
+Peep at the front element and display it if the queue is not empty.
+End
+Code :
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX_SIZE 100
+int queue[MAX_SIZE];
+int front = -1;
+int rear = -1;
+// Function to enqueue an element
+void enqueue(int data) {
+ if (rear == MAX_SIZE - 1) {
+ printf("Queue Overflow: Cannot enqueue %d, queue is 
+full\n", data);
+ return;
+ }
+ if (front == -1) {
+ front = 0;
+ }
+ queue[++rear] = data;
+ printf("Enqueued %d into the queue\n", data);
+}
+// Function to dequeue an element
+void dequeue() {
+ if (front == -1) {
+ printf("Queue Underflow: Cannot dequeue, queue is 
+empty\n");
+ return;
+ }
+ printf("Dequeued %d from the queue\n", queue[front++]);
+ if (front > rear) {
+ front = rear = -1; // Reset the queue when it becomes 
+empty
+ }
+}
+// Function to peep at the front element of the queue
+int peep() {
+ if (front == -1) {
+ printf("Queue is empty\n");
+ return -1; // Return a sentinel value indicating an 
+empty queue
+ }
+ return queue[front];
+}
+// Function to display the elements of the queue
+void display() {
+ if (front == -1) {
+ printf("Queue is empty\n");
+ return;
+ }
+ printf("Queue elements: ");
+ for (int i = front; i <= rear; i++) {
+ printf("%d ", queue[i]);
+ }
+ printf("\n");
+}
+int main() {
+ // Perform queue operations
+ enqueue(10);
+ enqueue(20);
+ enqueue(30);
+ display();
+ dequeue();
+ display();
+ int frontElement = peep();
+ if (frontElement != -1) {
+ printf("Front element: %d\n", frontElement);
+ }
+ return 0;
+}

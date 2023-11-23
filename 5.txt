@@ -1,0 +1,104 @@
+Algorithm :
+Initialization:
+1. Create an array called circularQueue to store queue elements.
+2. Initialize variables front and rear to -1 to represent an empty queue.
+3. Define a constant MAX_SIZE to determine the maximum capacity 
+of the queue.
+Enqueue (Add an element to the end of the queue):
+1. Check if the queue is full by verifying if (front == 0 && rear == 
+MAX_SIZE - 1) or (rear == front - 1). If it is, display an error 
+message and exit.
+2. If the queue is empty (i.e., front is -1), set front to 0.
+3. Increment rear in a circular manner (taking modulus MAX_SIZE) 
+to wrap around the array when it reaches the end.
+4. Store the new element at circularQueue[rear].
+Dequeue (Remove an element from the front of the queue):
+1. Check if the queue is empty by verifying if front is -1. If it is, 
+display an error message and exit, or return a sentinel value to 
+indicate failure.
+2. Retrieve the element at the front of the queue from 
+circularQueue[front].
+3. If front is equal to rear (indicating that there is only one element in 
+the queue), reset front and rear to -1 to indicate an empty queue.
+4. Otherwise, increment front in a circular manner (taking modulus 
+MAX_SIZE) to move to the next element in the queue.
+5. Return the retrieved element.
+Display Queue:
+1. Check if the queue is empty by verifying if front is -1. If it is, 
+display a message indicating that the queue is empty and exit.
+2. Initialize an index i with the value of front.
+3. Loop until i reaches (rear + 1) % MAX_SIZE (indicating the end of 
+the queue in a circular manner).
+a. Display circularQueue[i].
+b. Increment i in a circular manner (taking modulus MAX_SIZE) to 
+move to the next element.
+4. Display a newline to separate the output.
+Main Program:
+1. Initialize the circular queue and variables.
+2. Perform enqueue and dequeue operations as needed.
+3. Display the queue contents using the display function.
+End of Algorithm.
+Code : 
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX_SIZE 5
+int circularQueue[MAX_SIZE];
+int front = -1;
+int rear = -1;
+int isFull() {
+ return ((front == 0 && rear == MAX_SIZE - 1) || (rear == 
+front - 1));
+}
+int isEmpty() {
+ return (front == -1);
+}
+void enqueue(int item) {
+ if (isFull()) {
+ printf("Queue is full. Enqueue operation failed.\n");
+ return;
+ }
+ if (front == -1)
+ front = 0;
+ rear = (rear + 1) % MAX_SIZE;
+ circularQueue[rear] = item;
+}
+int dequeue() {
+ if (isEmpty()) {
+ printf("Queue is empty. Dequeue operation failed.\n");
+ return -1; 
+ }
+ int item = circularQueue[front];
+ if (front == rear) {
+ front = -1;
+ rear = -1;
+ } else {
+ front = (front + 1) % MAX_SIZE;
+ }
+ return item;
+}
+void display() {
+ if (isEmpty()) {
+ printf("Queue is empty.\n");
+ return;
+ }
+ int i = front;
+ printf("Elements in the queue: ");
+ do {
+ printf("%d ", circularQueue[i]);
+ i = (i + 1) % MAX_SIZE;
+ } while (i != (rear + 1) % MAX_SIZE);
+ printf("\n");
+}
+int main() {
+ enqueue(1);
+ enqueue(2);
+ enqueue(3);
+ enqueue(4);
+ enqueue(5);
+ enqueue(6); // Queue is full, this will fail
+ display();
+ printf("Dequeued: %d\n", dequeue());
+ printf("Dequeued: %d\n", dequeue());
+ display();
+ return 0;
+}

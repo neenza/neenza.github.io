@@ -1,0 +1,160 @@
+Algorithm :
+1. Include necessary libraries:
+ - Include the standard input/output library (stdio.h) for input and output 
+operations.
+ - Include the standard library (stdlib.h) for memory allocation functions.
+2. Define the structure for a Binary Search Tree (BST) node:
+ - Create a structure called "TreeNode" to represent a node in the BST.
+ - Each node has an integer value called "data" and two pointers: "left" and 
+"right" pointing to its left and right child nodes, respectively.
+3. Create a function to create a new node:
+ - Define a function called "createNode" that takes an integer "data" as input.
+ - Inside the function, allocate memory for a new node, set its data to the given 
+value, and initialize left and right pointers to NULL.
+ - Return the newly created node.
+4. Create a function to insert a node into the BST:
+ - Define a function called "insert" that takes a pointer to the root node and an 
+integer "data" as input.
+ - Check if the root is NULL. If it is, create a new node with the given data and 
+return it.
+ - If the data is less than the root's data, recursively call the "insert" function on 
+the left subtree.
+ - If the data is greater than the root's data, recursively call the "insert" function 
+on the right subtree.
+ - Return the modified root node.
+5. Create a function to find the minimum value node in a BST:
+ - Define a function called "findMin" that takes a pointer to a node as input.
+ - While the left child of the current node is not NULL, keep traversing to the 
+left child.
+ - Return the node when there are no more left children.
+6. Create a function to delete a node from the BST:
+ - Define a function called "deleteNode" that takes a pointer to the root node 
+and an integer "key" as input.
+ - Check if the root is NULL. If it is, return NULL (base case for recursion).
+ - If the key is less than the root's data, recursively call the "deleteNode" 
+function on the left subtree.
+ - If the key is greater than the root's data, recursively call the "deleteNode" 
+function on the right subtree.
+ - If the key matches the root's data, handle three cases:
+ - If the root has no left child, replace it with the right child and free the root 
+node.
+ - If the root has no right child, replace it with the left child and free the root 
+node.
+ - If the root has both left and right children, find the minimum value node in 
+the right subtree, replace the root's data with that value, and delete the minimum 
+value node from the right subtree.
+ - Return the modified root node.
+7. Create a function to perform an inorder traversal of the BST:
+ - Define a function called "inorderTraversal" that takes a pointer to a node as 
+input.
+ - If the node is not NULL, recursively traverse the left subtree, print the node's 
+data, and recursively traverse the right subtree.
+8. In the main function:
+ - Initialize the root of the BST as NULL.
+ - Insert several nodes with values into the BST using the "insert" function.
+ - Print the inorder traversal of the BST to display its elements.
+ - Delete a node with a specific key using the "deleteNode" function.
+ - Print the inorder traversal of the modified BST to show the changes.
+9. The program ends by returning 0.
+Code : 
+#include <stdio.h>
+#include <stdlib.h>
+struct TreeNode {
+ int data;
+ struct TreeNode* left;
+ struct TreeNode* right;
+};
+struct TreeNode* createNode(int data) {
+ struct TreeNode* newNode = (struct 
+TreeNode*)malloc(sizeof(struct TreeNode));
+ newNode->data = data;
+ newNode->left = newNode->right = NULL;
+ return newNode;
+}
+struct TreeNode* insert(struct TreeNode* root, int data) {
+ if (root == NULL) {
+ return createNode(data);
+ }
+ if (data < root->data) {
+ root->left = insert(root->left, data);
+ } else if (data > root->data) {
+ root->right = insert(root->right, data);
+ }
+ return root;
+}
+struct TreeNode* search(struct TreeNode* root, int key) {
+ if (root == NULL || root->data == key) {
+ return root;
+ }
+ if (key < root->data) {
+ return search(root->left, key);
+ } else {
+ return search(root->right, key);
+ }
+}
+void inorderTraversal(struct TreeNode* root) {
+ if (root != NULL) {
+ inorderTraversal(root->left);
+ printf("%d ", root->data);
+ inorderTraversal(root->right);
+ }
+}
+struct TreeNode* findMin(struct TreeNode* node) {
+ while (node->left != NULL) {
+ node = node->left;
+ }
+ return node;
+}
+struct TreeNode* deleteNode(struct TreeNode* root, int key) {
+ if (root == NULL) {
+ return root;
+ }
+ if (key < root->data) {
+ root->left = deleteNode(root->left, key);
+ } else if (key > root->data) {
+ root->right = deleteNode(root->right, key);
+ } else {
+ if (root->left == NULL) {
+ struct TreeNode* temp = root->right;
+ free(root);
+ return temp;
+ } else if (root->right == NULL) {
+ struct TreeNode* temp = root->left;
+ free(root);
+ return temp;
+ }
+ struct TreeNode* temp = findMin(root->right);
+ root->data = temp->data;
+ root->right = deleteNode(root->right, temp->data);
+ }
+ return root;
+}
+int main() {
+ struct TreeNode* root = NULL;
+ root = insert(root, 8);
+ insert(root, 10);
+ insert(root, 6);
+ insert(root, 12);
+ insert(root, 13);
+ insert(root, 4);
+ insert(root, 5);
+ insert(root, 9);
+ insert(root, 7);
+ insert(root, 11);
+ insert(root, 1);
+ insert(root, 20);
+ insert(root, 24);
+ printf("Inorder traversal of the BST: ");
+ inorderTraversal(root);
+ int key = 13;
+ struct TreeNode* result = search(root, key);
+ if (result != NULL) {
+ printf("\n%d found in the BST.", key);
+ } else {
+ printf("\n%d not found in the BST.", key);
+ }
+ int key2 = 9;
+ printf("\nDeleting node with key %d\n", key2);
+ root = deleteNode(root, key2);
+ return 0;
+}

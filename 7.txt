@@ -1,0 +1,142 @@
+Algorithm :
+Here's a step-by-step algorithm for the provided code, explained in 
+simple language:
+1. Include Necessary Libraries
+ - Include the standard input/output and memory allocation libraries 
+to use their functions.
+2. Define a Struct for Data
+ - Create a structure (struct) called "data" to store information.
+ - This structure includes:
+ - A character array (string) for a person's name, capable of holding 
+up to 100 characters.
+ - An integer for a person's roll number.
+ - An integer for a person's age.
+ - Two pointers:
+ - One pointer to the next item in the linked list.
+ - Another pointer to the previous item in the linked list (for a 
+doubly linked list).
+3. Insert a Node into the Doubly Linked List
+ - Create a function "insertnode" that takes the following parameters:
+ - The current head of the linked list.
+ - A name (string).
+ - A roll number (integer).
+ - An age (integer).
+ - Inside the function:
+ - Allocate memory for a new "data" structure.
+ - Copy the provided name, roll number, and age into the new 
+structure.
+ - Set the new node's "next" pointer to the current head.
+ - If there's a current head, set the current head's "prev" pointer to 
+the new node.
+ - Return the new node as the new head of the linked list.
+4. Delete a Node from the Doubly Linked List
+ - Create a function "deleteNode" that takes the following 
+parameters:
+ - The current head of the linked list.
+ - A roll number (integer) to identify the node to delete.
+ - Inside the function:
+ - Start from the current head and traverse the linked list until a 
+node with the provided roll number is found or the end of the list is 
+reached.
+ - If the node with the given roll number is not found, display a 
+message and return the current head.
+ - If the node is found:
+ - Update the "prev" and "next" pointers to skip the node to be 
+deleted.
+ - Free the memory used by the deleted node.
+ - Display a message confirming the deletion.
+ - Return the updated head of the linked list.
+5. Display the Doubly Linked List
+ - Create a function "display" that takes the current head of the 
+linked list as a parameter.
+ - Inside the function:
+ - Start from the current head and traverse the linked list.
+ - Display the name, roll number, and age of each node in the 
+linked list.
+6. Main Function
+ - In the "main" function:
+ - Initialize the head of the linked list to NULL.
+ - Insert three nodes into the linked list with names, roll numbers, 
+and ages.
+ - Display the contents of the linked list.
+ - Delete a specific node from the linked list using its roll number.
+ - Display the updated linked list.
+ - Free the memory used by all nodes in the linked list.
+7. End of Program
+ - Return 0 to indicate that the program has executed successfully 
+and is complete.
+Code :
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+struct data {
+ char name[100];
+ int rollno;
+ int age;
+ struct data* next;
+ struct data* prev; // New 'prev' pointer for doubly linked 
+list
+};
+struct data* insertnode(struct data* head, char name[], int 
+rollno, int age) {
+ struct data* newnode = (struct data*)malloc(sizeof(struct 
+data));
+ strcpy(newnode->name, name);
+ newnode->rollno = rollno;
+ newnode->age = age;
+ newnode->next = head;
+ newnode->prev = NULL; // Initialize the 'prev' pointer
+ if (head != NULL) {
+ head->prev = newnode; // Update the 'prev' pointer of 
+the old head
+ }
+ return newnode;
+}
+struct data* deleteNode(struct data* head, int rollno) {
+ struct data* current = head;
+ 
+ while (current != NULL && current->rollno != rollno) {
+ current = current->next;
+ }
+ if (current == NULL) {
+ printf("Roll number %d not found in the list.\n", 
+rollno);
+ return head;
+ }
+ if (current->prev != NULL) {
+ current->prev->next = current->next;
+ } else {
+ head = current->next;
+ }
+ if (current->next != NULL) {
+ current->next->prev = current->prev;
+ }
+ free(current);
+ printf("Node with roll number %d deleted.\n", rollno);
+ return head;
+}
+void display(struct data* head) {
+ struct data* current = head;
+ printf("Doubly linked list:\n");
+ while (current != NULL) {
+ printf("Name: %s, Roll no: %d, Age: %d\n", current-
+>name, current->rollno, current->age);
+ current = current->next;
+ }
+}
+int main() {
+ struct data* head = NULL;
+ head = insertnode(head, "neel", 212, 19);
+ head = insertnode(head, "mehak", 213, 18);
+ head = insertnode(head, "sonalika", 214, 17);
+ display(head);
+ head = deleteNode(head, 212);
+ display(head);
+ // Free memory for the doubly linked list
+ while (head != NULL) {
+ struct data* temp = head;
+ head = head->next;
+ free(temp);
+ }
+ return 0;
+}

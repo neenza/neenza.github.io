@@ -1,0 +1,59 @@
+Algorithm : 
+1. Start the program.
+2. Ask the user to input the number of elements (n) in the array.
+3. Create an integer array named "arr" with a size of n.
+4. Ask the user to input the elements of the array one by one.
+5. Implement the Bubble Sort algorithm to sort the array in ascending 
+order:
+ - Repeat the following steps for each element in the array, from the 
+first element to the second-to-last element (i varies from 0 to n - 2):
+ - For each element, repeat the following steps for all remaining 
+unsorted elements (j varies from 0 to n - i - 2):
+ - Compare arr[j] with arr[j + 1].
+ - If arr[j] is greater than arr[j + 1], swap the values of arr[j] and 
+arr[j + 1].
+6. Print the sorted array in ascending order.
+7. Implement a loop to print the sorted array in descending order:
+ - Starting from the last element (i equals n - 1), iterate backward to 
+the first element (i equals 0):
+ - Print the value of arr[i].
+8. End the program.
+Code :
+#include <stdio.h>
+void bubbleSort(int arr[], int n) {
+ for (int i = 0; i < n - 1; i++) {
+ for (int j = 0; j < n - i - 1; j++) {
+ if (arr[j] > arr[j + 1]) {
+ // Swap arr[j] and arr[j+1]
+ int temp = arr[j];
+ arr[j] = arr[j + 1];
+ arr[j + 1] = temp;
+ }
+ }
+ }
+}
+int main() {
+ int n;
+ printf("Enter the number of elements in the array: ");
+ scanf("%d", &n);
+ 
+ int arr[n];
+ 
+ printf("Enter the elements of the array:\n");
+ for (int i = 0; i < n; i++) {
+ scanf("%d", &arr[i]);
+ }
+ 
+ bubbleSort(arr, n);
+ 
+ printf("Sorted array in ascending order:\n");
+ for (int i = 0; i < n; i++) {
+ printf("%d ", arr[i]);
+ }
+ printf("\nSorted array in descending order:\n");
+ for (int i = n-1; i >= 0; i--) {
+ printf("%d ", arr[i]);
+ }
+ 
+ return 0;
+}

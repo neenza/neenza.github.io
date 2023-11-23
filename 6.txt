@@ -1,0 +1,94 @@
+Algorithm :
+1. Include necessary libraries:
+ - Include standard libraries like stdio.h, stdlib.h, and string.h to use 
+their functions and data types.
+2. Define a data structure:
+ - Create a data structure named "data" with fields:
+ - "name" (a character array with a maximum length of 100 
+characters)
+ - "rollno" (an integer to store roll number)
+ - "age" (an integer to store age)
+ - "next" (a pointer to another "data" structure)
+3. Create a function to insert a new node:
+ - Define a function called "insertnode" that takes parameters: head 
+(a pointer to the head of the linked list), name (a string), rollno (an 
+integer), and age (an integer).
+ - Allocate memory for a new "data" structure.
+ - Copy the provided name, rollno, and age into the new node.
+ - Set the "next" pointer of the new node to point to the current head 
+of the list.
+ - Return the new node.
+4. Create a function to display the linked list:
+ - Define a function called "display" that takes the head of the linked 
+list as a parameter.
+ - Initialize a pointer "current" to the head of the list.
+ - Loop through the list:
+ - Print the name, roll number, and age of the current node.
+ - Move the "current" pointer to the next node.
+ - Repeat until the "current" pointer reaches the end (i.e., it becomes 
+NULL).
+5. In the main function:
+ - Initialize a pointer "head" to NULL to represent an empty linked 
+list.
+6. Insert nodes into the linked list:
+ - Call the "insertnode" function to insert three nodes with different 
+data (name, rollno, age) into the list.
+ - Update the "head" pointer after each insertion.
+7. Display the linked list:
+ - Call the "display" function to print the contents of the linked list.
+8. Free memory and clean up:
+ - While the "head" pointer is not NULL, do the following:
+ - Create a temporary pointer "temp" to the head node.
+ - Move the "head" pointer to the next node.
+ - Free the memory allocated for the "temp" node.
+ - This ensures that memory is released and there are no memory 
+leaks.
+9. Return 0:
+ - End the program with a return statement indicating successful 
+execution.
+Code :
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+ struct data {
+ char name[100];
+ int rollno;
+ int age;
+ struct data* next;
+ };
+ 
+ struct data* insertnode(struct data* head, char name[], 
+int rollno, int age){
+ struct data* newnode = (struct 
+data*)malloc(sizeof(struct data));
+ strcpy(newnode->name, name);
+ newnode->rollno = rollno;
+ newnode->age = age;
+ newnode->next = head;
+ return newnode;
+ }
+ 
+ void display(struct data* head) {
+ struct data* current = head;
+ printf("linked list:");
+ while(current != NULL){
+ printf("name : %s,roll no:%d,age:%d\n",current-
+>name, current->rollno, current->age);
+ current = current->next;
+ }
+ }
+int main()
+{
+ struct data* head = NULL;
+ head = insertnode(head,"neel",212,19);
+ head = insertnode(head,"mehak",432,18);
+ head = insertnode(head,"sonalika",389,17);
+ 
+ display(head);
+ while (head != NULL) {
+ struct data* temp = head;
+ head = head->next;
+ free(temp);
+ }
+ return 0;
+}
